@@ -1,0 +1,65 @@
+public class Tree {
+
+    /* Символ (буква) */
+    private char character;
+
+    /* Честота на срещане на символа */
+    private int frequency;
+
+    /* Общо тегло на дървото */
+    private int weight;
+
+    /* Ляв и десен наследници */
+    private Tree left;
+
+    private Tree right;
+
+    public Tree() {
+    }
+    
+    public Tree(char character, int frequency, int weight) {
+        this.setCharacter(character);
+        this.setFrequency(frequency);
+        this.setWeight(weight);
+    }
+    
+    public char getCharacter() {
+        return this.character;
+    }
+
+    public void setCharacter(char character) {
+        this.character = character;
+    }
+
+    public int getFrequency() {
+        return this.frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public Tree getLeft() {
+        return this.left;
+    }
+
+    public void setLeft(Tree left) {
+        this.left = left;
+    }
+
+    public Tree getRight() {
+        return this.right;
+    }
+
+    public void setRight(Tree right) {
+        this.right = right;
+    }
+}
