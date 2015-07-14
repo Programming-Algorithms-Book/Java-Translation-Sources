@@ -1,11 +1,13 @@
 public class Program {
-    public static void main(string[] args) {
-        Stack<int> stack = new Stack();
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
 
-        stack.push(5);
-        stack.push(2);
-        stack.push(1);
+        stack.push(57);
+        stack.push(6);
+        stack.push(111);
 
-
+        while (!stack.isEmpty()) {
+            System.out.println(stack.pop());
+        }
     }
 }
