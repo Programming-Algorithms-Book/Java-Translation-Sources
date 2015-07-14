@@ -14,7 +14,11 @@ public class Program {
             number = scanner.nextInt();
         }
 
-        System.out.println("Въведените числа са:");
+        System.out.println("\nБрой въведени числа: " + stack.size());
+
+        System.out.println("\nНай-горен елемент в стека: " + stack.peek());
+
+        System.out.println("\nВъведените числа са:");
         while (!stack.isEmpty()) {
             System.out.println(stack.pop());
         }

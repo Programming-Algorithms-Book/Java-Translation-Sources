@@ -22,7 +22,7 @@ public class Stack<T> {
     }
 
     public T pop() {
-        if (this.top == 0) {
+        if (this.isEmpty()) {
             throw new EmptyStackException();
         }
 
@@ -31,11 +31,15 @@ public class Stack<T> {
     }
 
     public T peek() {
-        if (this.top == 0) {
+        if (this.isEmpty()) {
             throw new EmptyStackException();
         }
 
         return (T) this.items[this.top - 1];
+    }
+
+    public int size() {
+        return this.top;
     }
 
     public boolean isEmpty() {
