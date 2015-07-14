@@ -1,11 +1,11 @@
 public class Stack<T> {
     private static final int CAPACITY = 10;
 
-    private T[] items;
+    private Object[] items;
     private int top;
 
     public Stack() {
-        this.items = (T[])new Object[CAPACITY];
+        this.items = new Object[CAPACITY];
         this.top = 0;
     }
 
@@ -16,7 +16,7 @@ public class Stack<T> {
 
     public T pop() {
         this.top--;
-        return this.items[this.top];
+        return (T)this.items[this.top];
     }
 
     public boolean isEmpty() {
