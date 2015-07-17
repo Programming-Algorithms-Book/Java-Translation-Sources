@@ -1,4 +1,5 @@
 import sun.plugin.dom.exception.InvalidStateException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.LinkedList;
 
@@ -24,10 +25,6 @@ public class HashTable<TKey, TValue> {
         this.currentLoad = 0;
         this.count = 0;
         this.filledChainsCount = 0;
-    }
-
-    public int size() {
-        return this.count;
     }
 
     public void add(TKey key, TValue value) {
@@ -81,6 +78,18 @@ public class HashTable<TKey, TValue> {
         }
 
         existingEntry.setValue(value);
+    }
+
+    public void remove(TKey key) {
+        throw new NotImplementedException();
+    }
+
+    public int size() {
+        return this.count;
+    }
+
+    public void clear() {
+        throw new NotImplementedException();
     }
 
     private Entry<TKey, TValue> find(TKey key) {
