@@ -1,5 +1,3 @@
-import sun.plugin.dom.exception.InvalidStateException;
-
 import java.util.LinkedList;
 
 public class HashTable<TKey, TValue> {
@@ -33,7 +31,7 @@ public class HashTable<TKey, TValue> {
 
         Entry<TKey, TValue> existingEntry = this.find(key);
         if (existingEntry != null) {
-            throw new InvalidStateException("Вече се съдържа елемент с посочения ключ в хеш-таблицата.");
+            throw new IllegalStateException("Вече се съдържа елемент с посочения ключ в хеш-таблицата.");
         }
 
         this.ensureCapacity();
@@ -129,9 +127,8 @@ public class HashTable<TKey, TValue> {
     private int getChainIndex(TKey key) {
         // Запазваме стойността положителна
         int hashCode = key.hashCode() & Integer.MAX_VALUE;
-        int chainIndex = hashCode % this.chains.length;
 
-        return chainIndex;
+        return hashCode % this.chains.length;
     }
 
     private void ensureCapacity() {
