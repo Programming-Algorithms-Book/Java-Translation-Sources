@@ -1,5 +1,4 @@
 import sun.plugin.dom.exception.InvalidStateException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.LinkedList;
 
@@ -8,7 +7,7 @@ public class HashTable<TKey, TValue> {
     private static final double MAX_LOAD = 0.75;
 
     private LinkedList<Entry<TKey, TValue>>[] chains;
-    private double currentLoad;
+    private int capacity;
     private int count;
     private int filledChainsCount;
 
@@ -22,7 +21,7 @@ public class HashTable<TKey, TValue> {
         }
 
         this.chains = this.getNewChains(capacity);
-        this.currentLoad = 0;
+        this.capacity = capacity;
         this.count = 0;
         this.filledChainsCount = 0;
     }
@@ -49,7 +48,6 @@ public class HashTable<TKey, TValue> {
         this.chains[chainIndex].addLast(newEntry);
 
         this.count++;
-        this.currentLoad = this.filledChainsCount / this.chains.length;
     }
 
     public TValue get(TKey key) {
@@ -80,8 +78,26 @@ public class HashTable<TKey, TValue> {
         existingEntry.setValue(value);
     }
 
-    public void remove(TKey key) {
-        throw new NotImplementedException();
+    public boolean remove(TKey key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Ключът на елемент от хеш-таблицата не може да бъде null.");
+        }
+
+        boolean removed = false;
+
+        int chainIndex = this.getChainIndex(key);
+        if (this.chains[chainIndex] != null) {
+            for (Entry<TKey, TValue> entry : this.chains[chainIndex]) {
+                if (entry.getKey().equals(key)) {
+                    this.chains[chainIndex].remove(entry);
+                    this.count--;
+                    removed = true;
+                    break;
+                }
+            }
+        }
+
+        return removed;
     }
 
     public int size() {
@@ -89,7 +105,9 @@ public class HashTable<TKey, TValue> {
     }
 
     public void clear() {
-        throw new NotImplementedException();
+        this.chains = this.getNewChains(this.capacity);
+        this.count = 0;
+        this.filledChainsCount = 0;
     }
 
     private Entry<TKey, TValue> find(TKey key) {
@@ -117,7 +135,8 @@ public class HashTable<TKey, TValue> {
     }
 
     private void ensureCapacity() {
-        if (this.currentLoad > MAX_LOAD) {
+        double currentLoad = (double) this.filledChainsCount / this.chains.length;
+        if (currentLoad > MAX_LOAD) {
             int newCapacity = this.chains.length * 2;
             LinkedList<Entry<TKey, TValue>>[] oldChains = this.chains;
             this.chains = getNewChains(newCapacity);
